@@ -8,3 +8,6 @@ A flutter project showcasing possibilities of bloc pattern
 
 ## Video Series
 **Part 1**
+
+## Screenshots
+<table style={border:"none"}><tr><td><img src="https://github.com/TechieBlossom/bloc_implementation/blob/master/screenshots/state_uninitialized.png" alt="State Uninitialized" width="300"/></td><td><img src="https://github.com/TechieBlossom/bloc_implementation/blob/master/screenshots/state_player_fetching.png" alt="State Player Fetching" width="300"/></td><td><img src="https://github.com/TechieBlossom/bloc_implementation/blob/master/screenshots/state_player_fetched.png" alt="State Player Fetched" width="300"/></td></tr></table>
