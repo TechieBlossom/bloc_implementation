@@ -32,19 +32,27 @@ class PlayerListing extends StatelessWidget {
 
   Widget buildPlayersList(List<Players> players) {
     return Expanded(
-      child: ListView.separated(itemBuilder: (BuildContext context, index) {
-        Players player = players[index];
-        return ListTile(
-          leading: Image.network(player.headshot.imgUrl, width: 70.0, height: 70.0,),
-          title: Text(player.name, style: titleStyle),
-          subtitle: Text(player.club.name, style: subTitleStyle),
-        );
-      }, separatorBuilder: (BuildContext context, index) {
-        return Divider(
-          height: 8.0,
-          color: Colors.transparent,
-        );
-      }, itemCount: players.length,),
+      child: ListView.separated(
+        itemBuilder: (BuildContext context, index) {
+          Players player = players[index];
+          return ListTile(
+            leading: Image.network(
+              player.headshot.imgUrl,
+              width: 70.0,
+              height: 70.0,
+            ),
+            title: Text(player.name, style: titleStyle),
+            subtitle: Text(player.club.name, style: subTitleStyle),
+          );
+        },
+        separatorBuilder: (BuildContext context, index) {
+          return Divider(
+            height: 8.0,
+            color: Colors.transparent,
+          );
+        },
+        itemCount: players.length,
+      ),
     );
   }
 }

@@ -3,11 +3,11 @@ import 'package:bloc_implementation/pages/player_listing.dart';
 import 'package:bloc_implementation/services/repository.dart';
 import 'package:bloc_implementation/themes/themes.dart';
 import 'package:bloc_implementation/widgets/horizontal_bar.dart';
+import 'package:bloc_implementation/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
-
   final PlayerRepository playerRepository;
 
   HomePage({this.playerRepository});
@@ -19,13 +19,13 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-
   PlayerListingBloc _playerListingBloc;
 
   @override
   void initState() {
     super.initState();
-    _playerListingBloc = PlayerListingBloc(playerRepository: widget.playerRepository);
+    _playerListingBloc =
+        PlayerListingBloc(playerRepository: widget.playerRepository);
   }
 
   @override
@@ -41,11 +41,16 @@ class HomePageState extends State<HomePage> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.white,
-          title: Text('Football Players', style: appBarTextStyle,),
+          title: Text(
+            'Football Players',
+            style: appBarTextStyle,
+          ),
         ),
         body: Column(
           children: <Widget>[
             HorizontalBar(),
+            SizedBox(height: 10.0),
+            SearchBar(),
             SizedBox(height: 10.0),
             PlayerListing()
           ],
