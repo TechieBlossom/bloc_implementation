@@ -6,3 +6,4 @@ TextStyle titleStyle = TextStyle(color: Colors.black, fontSize: 20.0);
 TextStyle searchTextStyle = TextStyle(color: Colors.black, fontSize: 22.0);
 TextStyle subTitleStyle = TextStyle(color: Colors.black, fontSize: 14.0);
 TextStyle hintStyle = TextStyle(color: Colors.black54, fontSize: 20.0);
+TextStyle choiceTextStyle = TextStyle(color: Colors.black, fontSize: 18.0);

@@ -10,10 +10,16 @@ class PlayerListingBloc extends Bloc<PlayerListingEvent, PlayerListingState> {
 
   PlayerListingBloc({this.playerRepository}) : assert(playerRepository != null);
 
-  @override
+  /*@override
   Stream<PlayerListingEvent> transform(Stream<PlayerListingEvent> events) {
     return (events as PublishSubject<PlayerListingEvent>)
         .transform(DebounceStreamTransformer(Duration(milliseconds: 250)));
+  }*/
+
+  @override
+  Stream<PlayerListingState> transform(Stream<PlayerListingEvent> events, Stream<PlayerListingState> Function(PlayerListingEvent event) next) {
+    return super.transform((events as PublishSubject<PlayerListingEvent>)
+        .debounceTime(Duration(milliseconds: 1000)), next);
   }
 
   @override
@@ -26,6 +32,31 @@ class PlayerListingBloc extends Bloc<PlayerListingEvent, PlayerListingState> {
   PlayerListingState get initialState => PlayerUninitializedState();
 
   @override
+  Stream<PlayerListingState> mapEventToState(PlayerListingEvent event) async* {
+    print("mapEventToState");
+    yield PlayerFetchingState();
+    try {
+      List<Players> players;
+      if (event is CountrySelectedEvent) {
+        players = await playerRepository
+            .fetchPlayersByCountry(event.nationModel.countryId);
+      } else if (event is SearchTextChangedEvent) {
+        players = await playerRepository.fetchPlayersByName(event.searchTerm);
+      } else if(event is AdvanceSearchChangeEvent) {
+        players = await playerRepository.fetchPlayersSearchConfiguration(event.searchConfiguration);
+      }
+      if (players.length == 0) {
+        yield PlayerEmptyState();
+      } else {
+        yield PlayerFetchedState(players: players);
+      }
+    } catch (_) {
+      yield PlayerErrorState();
+    }
+  }
+
+
+  /*@override
   Stream<PlayerListingState> mapEventToState(
       PlayerListingState currentState, PlayerListingEvent event) async* {
     print("mapEventToState");
@@ -47,5 +78,5 @@ class PlayerListingBloc extends Bloc<PlayerListingEvent, PlayerListingState> {
     } catch (_) {
       yield PlayerErrorState();
     }
-  }
+  }*/
 }

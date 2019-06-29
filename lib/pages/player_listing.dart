@@ -41,8 +41,13 @@ class PlayerListing extends StatelessWidget {
               width: 70.0,
               height: 70.0,
             ),
+            trailing: Text(
+              player.rating.toString() + "  " + player.position,
+              style: titleStyle,
+            ),
+            isThreeLine: true,
             title: Text(player.name, style: titleStyle),
-            subtitle: Text(player.club.name, style: subTitleStyle),
+            subtitle: Text(player.club.name + " | " + player.league.name +" | " + player.nation.name, style: subTitleStyle),
           );
         },
         separatorBuilder: (BuildContext context, index) {
